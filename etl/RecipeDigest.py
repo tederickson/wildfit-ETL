@@ -37,3 +37,17 @@ class RecipeDigest:
                            self.serving_unit,
                            self.serving_qty,
                            self.introduction)
+
+    # Convert class to JSON for /v1/recipes/users/{userId}
+    def to_json_create_recipe(self):
+        json = {
+            "name": self.name,
+            "season": self.season,
+            "prepTimeMin": self.prep_time_min,
+            "cookTimeMin": self.cook_time_min,
+            "servingUnit": self.serving_unit,
+            "servingQty": self.serving_qty,
+            "introduction": self.introduction
+        }
+
+        return json
