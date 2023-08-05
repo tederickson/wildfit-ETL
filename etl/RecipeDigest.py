@@ -26,7 +26,7 @@ class RecipeDigest:
                 " servingUnit='{}', servingQty={}, introduction='{}', instruction_groups [")
 
         for x in self.instruction_groups:
-            text = text + "\n" + str(x) + ","
+            text = text + "\n   " + str(x) + ","
         text = text + "]"
 
         return text.format(self.recipe_id,
