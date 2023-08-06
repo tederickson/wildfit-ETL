@@ -73,4 +73,4 @@ class TestRecipeDigest(TestCase):
         self.assertEqual(self.season, dictionary['season'])
         self.assertEqual(self.prep_time_min, dictionary['prepTimeMin'])
         self.assertEqual(self.serving_unit, dictionary['servingUnit'])
-        self.assertTrue('instructionGroups' not in dictionary)
+        self.assertTrue(1, len(dictionary['instructionGroups']))
