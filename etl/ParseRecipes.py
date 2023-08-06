@@ -1,5 +1,5 @@
 import os
-import urllib.parse
+
 import openpyxl
 import requests
 from dotenv import load_dotenv
@@ -26,8 +26,7 @@ def validate_sheet_names(sheet_names):
 
 
 def is_new_recipe(recipe_digest):
-    safe_string = urllib.parse.quote_plus(recipe_digest.name)
-    url = HOST_SERVER + "/v1/recipes/seasons/" + recipe_digest.season + "/names/" + safe_string
+    url = HOST_SERVER + "/v1/recipes/seasons/" + recipe_digest.season + "/names/" + recipe_digest.name
     response = requests.get(url)
 
     if response.status_code != 200:
