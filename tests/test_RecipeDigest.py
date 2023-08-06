@@ -21,7 +21,7 @@ class TestRecipeDigest(TestCase):
                               self.serving_unit + "  ",
                               self.serving_qty,
                               self.introduction + "  ")
-        self.assertEqual(0, recipe.recipe_id)
+
         self.assertEqual(self.name, recipe.name)
         self.assertEqual(self.season, recipe.season)
         self.assertEqual(self.serving_qty, recipe.serving_qty)
@@ -52,7 +52,7 @@ class TestRecipeDigest(TestCase):
                               self.serving_qty,
                               self.introduction)
         text = str(recipe)
-        self.assertIn("recipe_id", text)
+        self.assertIn("season", text)
 
     def test_to_json_create_recipe(self):
         recipe = RecipeDigest(self.name,

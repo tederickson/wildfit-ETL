@@ -1,5 +1,4 @@
 class RecipeDigest:
-    JSON_RECIPE_ID = "id"
     JSON_NAME = "name"
     JSON_SEASON = "season"
     JSON_PREP_TIME_MIN = "prepTimeMin"
@@ -16,7 +15,6 @@ class RecipeDigest:
                  serving_unit,
                  serving_qty,
                  introduction):
-        self.recipe_id = 0
         self.name = str(name).strip()
         self.season = str(season).strip()
         self.prep_time_min = prep_time_min
@@ -30,15 +28,14 @@ class RecipeDigest:
         self.instruction_groups.append(instruction_group)
 
     def __str__(self):
-        text = ("RecipeDigest: recipe_id={}, name='{}', season={}, prepTimeMin={}, cookTimeMin={},"
+        text = ("RecipeDigest: name='{}', season={}, prepTimeMin={}, cookTimeMin={},"
                 " servingUnit='{}', servingQty={}, introduction='{}', instruction_groups [")
 
         for x in self.instruction_groups:
             text = text + "\n   " + str(x) + ","
         text = text + "]"
 
-        return text.format(self.recipe_id,
-                           self.name,
+        return text.format(self.name,
                            self.season,
                            self.prep_time_min,
                            self.cook_time_min,
