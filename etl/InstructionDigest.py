@@ -1,8 +1,8 @@
 class InstructionDigest:
-    def __init__(self, instruction_digest_id,
+    def __init__(self,
                  step_number,
                  instruction):
-        self.instruction_digest_id = instruction_digest_id
+        self.instruction_digest_id = 0
         self.step_number = step_number
         self.instruction = instruction
 

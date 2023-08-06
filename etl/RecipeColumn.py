@@ -6,11 +6,10 @@ class RecipeColumn(Enum):
     INSTRUCTION = 1
     TEXT = 2
     INGREDIENT = 3
-    FOOD = 4
-    DESCRIPTION = 5
-    QUANTITY = 6
-    UNIT = 7
-    TYPE = 8
+    DESCRIPTION = 4
+    QUANTITY = 5
+    UNIT = 6
+    TYPE = 7
 
     @classmethod
     def from_heading(cls, name):
@@ -23,8 +22,6 @@ class RecipeColumn(Enum):
                 return cls.TEXT
             case 'Ingredient':
                 return cls.INGREDIENT
-            case 'Food':
-                return cls.FOOD
             case 'Description':
                 return cls.DESCRIPTION
             case 'Quantity':

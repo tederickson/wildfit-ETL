@@ -1,8 +1,8 @@
 class InstructionGroupDigest:
-    def __init__(self, instruction_group_digest_id,
+    def __init__(self,
                  instruction_group_number,
                  name):
-        self.instruction_group_digest_id = instruction_group_digest_id
+        self.instruction_group_digest_id = 0
         self.instruction_group_number = instruction_group_number
         self.name = name
         self.instructions = []

@@ -38,7 +38,7 @@ class TestRecipeDigest(TestCase):
         self.assertEqual(self.name, recipe.name)
         self.assertEqual(0, len(recipe.instruction_groups))
 
-        instruction_group = InstructionGroupDigest(5, 15, "Salad")
+        instruction_group = InstructionGroupDigest(15, "Salad")
         recipe.add_instruction_group(instruction_group)
         self.assertEqual(1, len(recipe.instruction_groups))
 
@@ -62,7 +62,7 @@ class TestRecipeDigest(TestCase):
                               self.serving_qty,
                               self.introduction)
 
-        instruction_group = InstructionGroupDigest(5, 15, "Salad")
+        instruction_group = InstructionGroupDigest(15, "Salad")
         recipe.add_instruction_group(instruction_group)
 
         dictionary = recipe.to_json_create_recipe()

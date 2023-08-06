@@ -24,8 +24,7 @@ class TestInstructionGroupDigest(TestCase):
     ingredient_type = "DAIRY"
 
     def test_add_instruction(self):
-        instruction_group_digest = InstructionGroupDigest(self.instruction_group_digest_id,
-                                                          self.instruction_group_number,
+        instruction_group_digest = InstructionGroupDigest(self.instruction_group_number,
                                                           self.name)
         instruction_digest = InstructionDigest(self.instruction_digest_id,
                                                self.step_number,
@@ -35,9 +34,7 @@ class TestInstructionGroupDigest(TestCase):
         print(instruction_group_digest)
 
     def test_add_ingredient(self):
-        instruction_group_digest = InstructionGroupDigest(self.instruction_group_digest_id,
-                                                          self.instruction_group_number,
-                                                          self.name)
+        instruction_group_digest = InstructionGroupDigest(self.instruction_group_number, self.name)
 
         ingredient = IngredientDigest(self.ingredient_digest_id,
                                       self.recipe_id,
