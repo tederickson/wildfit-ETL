@@ -4,6 +4,7 @@ import requests
 import urllib.parse
 from dotenv import load_dotenv
 from etl.RecipeDigest import RecipeDigest
+from etl.TitleColumn import TitleColumn
 
 load_dotenv()  # take environment variables from .env.
 
@@ -40,8 +41,8 @@ def validate_column_names(expected, sheet):
         index += 1
 
 
-def get_value(row, column_names, column_name):
-    index = column_names.index(column_name)
+def get_value(row, column_name):
+    index = TitleColumn.from_heading(column_name).value
     return row[index].value
 
 
@@ -49,13 +50,13 @@ def parse_recipe_title_sheet(recipe_sheet):
     validate_column_names(TITLE_COLUMNS, recipe_sheet)
     first_row = recipe_sheet[2]
 
-    recipe_digest = RecipeDigest(get_value(first_row, TITLE_COLUMNS, 'Title'),
-                                 get_value(first_row, TITLE_COLUMNS, 'Season'),
-                                 get_value(first_row, TITLE_COLUMNS, 'PrepTimeMinutes'),
-                                 get_value(first_row, TITLE_COLUMNS, 'CookTimeMinutes'),
-                                 get_value(first_row, TITLE_COLUMNS, 'ServingUnit'),
-                                 get_value(first_row, TITLE_COLUMNS, 'ServingQty'),
-                                 get_value(first_row, TITLE_COLUMNS, 'Introduction'))
+    recipe_digest = RecipeDigest(get_value(first_row, 'Title'),
+                                 get_value(first_row, 'Season'),
+                                 get_value(first_row, 'PrepTimeMinutes'),
+                                 get_value(first_row, 'CookTimeMinutes'),
+                                 get_value(first_row, 'ServingUnit'),
+                                 get_value(first_row, 'ServingQty'),
+                                 get_value(first_row, 'Introduction'))
     return recipe_digest
 
 
