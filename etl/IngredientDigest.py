@@ -19,3 +19,14 @@ class IngredientDigest:
                            self.ingredient_serving_qty,
                            self.ingredient_serving_unit,
                            self.ingredient_type)
+
+    def to_json_dictionary(self):
+        json = {
+            "foodName": self.food_name,
+            "description": self.description,
+            "ingredientServingQty": self.ingredient_serving_qty,
+            "ingredientServingUnit": self.ingredient_serving_unit,
+            "ingredientType": self.ingredient_type
+        }
+
+        return json

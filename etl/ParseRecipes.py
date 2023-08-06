@@ -1,6 +1,5 @@
 import os
 import urllib.parse
-
 import openpyxl
 import requests
 from dotenv import load_dotenv
@@ -40,6 +39,17 @@ def is_new_recipe(recipe_digest):
     return len(existing_recipes) == 0
 
 
+def create_recipe(recipe_digest):
+    url = HOST_SERVER + "/v1/recipes/users/" + UUID
+    json_dictionary = recipe_digest.to_json_dictionary()
+
+    response = requests.post(url, json=json_dictionary)
+
+    if response.status_code != 200:
+        print(f"Status Code: {response.status_code}, Response: {response.json()}")
+        raise Exception(response.json())
+
+
 def parse_recipe(recipe_file):
     print(recipe_file)
     wb = openpyxl.load_workbook(RECIPE_DIRECTORY + recipe_file)
@@ -54,6 +64,7 @@ def parse_recipe(recipe_file):
     if is_new_recipe(recipe_digest):
         parse_recipe_sheet.parse_sheet(wb[RECIPE_SHEET], recipe_digest)
         print(recipe_digest)
+        create_recipe(recipe_digest)
 
 
 if __name__ == '__main__':

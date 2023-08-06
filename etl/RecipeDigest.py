@@ -1,11 +1,11 @@
+from etl.AbstractParseSheet import AbstractParseSheet
+from etl.IngredientDigest import IngredientDigest
+from etl.InstructionDigest import InstructionDigest
+from etl.InstructionGroupDigest import InstructionGroupDigest
+from etl.RecipeColumn import RecipeColumn
+
+
 class RecipeDigest:
-    JSON_NAME = "name"
-    JSON_SEASON = "season"
-    JSON_PREP_TIME_MIN = "prepTimeMin"
-    JSON_COOK_TIME_MIN = "cookTimeMin"
-    JSON_SERVING_UNIT = "servingUnit"
-    JSON_SERVING_QTY = "servingQty"
-    JSON_INTRODUCTION = "introduction"
 
     def __init__(self,
                  name,
@@ -43,16 +43,21 @@ class RecipeDigest:
                            self.serving_qty,
                            self.introduction)
 
-    # Convert class to JSON for /v1/recipes/users/{userId}
-    def to_json_create_recipe(self):
+    # Convert class to dictionary for /v1/recipes/users/{userId}
+    def to_json_dictionary(self):
         json = {
-            self.JSON_NAME: self.name,
-            self.JSON_SEASON: self.season,
-            self.JSON_PREP_TIME_MIN: self.prep_time_min,
-            self.JSON_COOK_TIME_MIN: self.cook_time_min,
-            self.JSON_SERVING_UNIT: self.serving_unit,
-            self.JSON_SERVING_QTY: self.serving_qty,
-            self.JSON_INTRODUCTION: self.introduction
+            "name": self.name,
+            "season": self.season,
+            "prepTimeMin": self.prep_time_min,
+            "cookTimeMin": self.cook_time_min,
+            "servingUnit": self.serving_unit,
+            "servingQty": self.serving_qty,
+            "introduction": self.introduction,
+            "instructionGroups": []
         }
+
+        for x in self.instruction_groups:
+            if isinstance(x, InstructionGroupDigest):
+                json["instructionGroups"].append(x.to_json_dictionary())
 
         return json

@@ -66,7 +66,7 @@ class TestRecipeDigest(TestCase):
         instruction_group = InstructionGroupDigest(15, "Salad")
         recipe.add_instruction_group(instruction_group)
 
-        dictionary = recipe.to_json_create_recipe()
+        dictionary = recipe.to_json_dictionary()
 
         self.assertTrue('id' not in dictionary)
         self.assertEqual(self.name, dictionary['name'])
