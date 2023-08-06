@@ -1,7 +1,11 @@
 import os
 import openpyxl
-
+import requests
+import urllib.parse
+from dotenv import load_dotenv
 from etl.RecipeDigest import RecipeDigest
+
+load_dotenv()  # take environment variables from .env.
 
 RECIPE_DIRECTORY = "../data/"
 TITLE_SHEET = 'Sheet1'
@@ -16,6 +20,8 @@ TITLE_COLUMNS = ['Season',
                  'ServingUnit']
 
 RECIPE_COLUMNS = ['Title', 'Instruction', 'Text', 'Ingredient', 'Food', 'Description', 'Quantity', 'Unit', 'Type']
+UUID = ""
+HOST_SERVER = ""
 
 
 def validate_sheet_names(sheet_names):
@@ -39,12 +45,11 @@ def get_value(row, column_names, column_name):
     return row[index].value
 
 
-def parse_recipe_title_sheet(recipe_sheet) -> RecipeDigest:
+def parse_recipe_title_sheet(recipe_sheet):
     validate_column_names(TITLE_COLUMNS, recipe_sheet)
     first_row = recipe_sheet[2]
 
-    recipe_digest = RecipeDigest(-1,
-                                 get_value(first_row, TITLE_COLUMNS, 'Title'),
+    recipe_digest = RecipeDigest(get_value(first_row, TITLE_COLUMNS, 'Title'),
                                  get_value(first_row, TITLE_COLUMNS, 'Season'),
                                  get_value(first_row, TITLE_COLUMNS, 'PrepTimeMinutes'),
                                  get_value(first_row, TITLE_COLUMNS, 'CookTimeMinutes'),
@@ -54,8 +59,16 @@ def parse_recipe_title_sheet(recipe_sheet) -> RecipeDigest:
     return recipe_digest
 
 
-def parse_recipe_sheet(recipe_sheet):
+def parse_recipe_sheet(recipe_digest, recipe_sheet):
     validate_column_names(RECIPE_COLUMNS, recipe_sheet)
+
+
+def is_new_recipe(recipe_digest):
+    safe_string = urllib.parse.quote_plus(recipe_digest.name)
+    url = HOST_SERVER + "/v1/recipes/seasons/" + recipe_digest.season + "/names/" + safe_string
+    response = requests.get(url)
+
+    return response.status_code == 404
 
 
 def parse_recipe(recipe_file):
@@ -64,10 +77,20 @@ def parse_recipe(recipe_file):
     validate_sheet_names(wb.sheetnames)
     recipe_digest = parse_recipe_title_sheet(wb[TITLE_SHEET])
     print(recipe_digest)
-    parse_recipe_sheet(wb[RECIPE_SHEET])
+
+    if is_new_recipe(recipe_digest):
+        parse_recipe_sheet(recipe_digest, wb[RECIPE_SHEET])
 
 
 if __name__ == '__main__':
+    UUID = os.environ.get('UUID')
+    if UUID is None:
+        raise Exception("UUID environment variable is not defined")
+
+    HOST_SERVER = os.environ.get('host-server')
+    if HOST_SERVER is None:
+        raise Exception("host-server environment variable is not defined")
+
     recipe_list = os.listdir(RECIPE_DIRECTORY)
 
     for recipe in recipe_list:

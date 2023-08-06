@@ -4,18 +4,31 @@ from etl.InstructionGroupDigest import InstructionGroupDigest
 
 
 class TestRecipeDigest(TestCase):
-    digest_id = 1230
     name = "Tuna Salad"
     season = "SPRING"
     prep_time_min = 15
     cook_time_min = 0
-    serving_unit = 4
-    serving_qty = "serving"
+    serving_unit = "serving"
+    serving_qty = 4
     introduction = "We love this!"
 
+    def test_strip_whitespace(self):
+        recipe = RecipeDigest(self.name + "  ",
+                              self.season + "  ",
+                              self.prep_time_min,
+                              self.cook_time_min,
+                              self.serving_unit + "  ",
+                              self.serving_qty,
+                              self.introduction + "  ")
+        self.assertEqual(0, recipe.recipe_id)
+        self.assertEqual(self.name, recipe.name)
+        self.assertEqual(self.season, recipe.season)
+        self.assertEqual(self.serving_qty, recipe.serving_qty)
+        self.assertEqual(self.introduction, recipe.introduction)
+        self.assertEqual(0, len(recipe.instruction_groups))
+
     def test_add_instruction_group(self):
-        recipe = RecipeDigest(self.digest_id,
-                              self.name,
+        recipe = RecipeDigest(self.name,
                               self.season,
                               self.prep_time_min,
                               self.cook_time_min,
@@ -30,8 +43,7 @@ class TestRecipeDigest(TestCase):
         self.assertEqual(1, len(recipe.instruction_groups))
 
     def test_to_string(self):
-        recipe = RecipeDigest(self.digest_id,
-                              self.name,
+        recipe = RecipeDigest(self.name,
                               self.season,
                               self.prep_time_min,
                               self.cook_time_min,
@@ -42,8 +54,7 @@ class TestRecipeDigest(TestCase):
         self.assertIn("recipe_id", text)
 
     def test_to_json_create_recipe(self):
-        recipe = RecipeDigest(self.digest_id,
-                              self.name,
+        recipe = RecipeDigest(self.name,
                               self.season,
                               self.prep_time_min,
                               self.cook_time_min,
