@@ -31,7 +31,13 @@ def is_new_recipe(recipe_digest):
     url = HOST_SERVER + "/v1/recipes/seasons/" + recipe_digest.season + "/names/" + safe_string
     response = requests.get(url)
 
-    return response.status_code == 404
+    if response.status_code != 200:
+        raise Exception("{} failed.  Response is {}".format(url, response))
+
+    response_dictionary = response.json()
+    existing_recipes = response_dictionary.get('recipes')
+
+    return len(existing_recipes) == 0
 
 
 def parse_recipe(recipe_file):
@@ -47,6 +53,7 @@ def parse_recipe(recipe_file):
 
     if is_new_recipe(recipe_digest):
         parse_recipe_sheet.parse_sheet(wb[RECIPE_SHEET], recipe_digest)
+        print(recipe_digest)
 
 
 if __name__ == '__main__':
