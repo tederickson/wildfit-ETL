@@ -2,7 +2,6 @@ class InstructionGroupDigest:
     def __init__(self,
                  instruction_group_number,
                  name):
-        self.instruction_group_digest_id = 0
         self.instruction_group_number = instruction_group_number
         self.name = name
         self.instructions = []
@@ -15,7 +14,7 @@ class InstructionGroupDigest:
         self.ingredients.append(ingredient)
 
     def __str__(self):
-        text = "InstructionGroupDigest: id={}, instruction_group_number={}, name='{}'"
+        text = "InstructionGroupDigest: instruction_group_number={}, name='{}'"
         text = text + ", instructions ["
         for x in self.instructions:
             text = text + "\n   " + str(x) + ","
@@ -26,6 +25,4 @@ class InstructionGroupDigest:
             text = text + "\n   " + str(x) + ","
         text = text + "]"
 
-        return text.format(self.instruction_group_digest_id,
-                           self.instruction_group_number,
-                           self.name)
+        return text.format(self.instruction_group_number, self.name)
