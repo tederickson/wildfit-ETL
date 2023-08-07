@@ -1,3 +1,4 @@
+import json
 import os
 
 import openpyxl
@@ -41,12 +42,21 @@ def is_new_recipe(recipe_digest):
 def create_recipe(recipe_digest):
     url = HOST_SERVER + "/v1/recipes/users/" + UUID
     json_dictionary = recipe_digest.to_json_dictionary()
+    write_to_server_test_directory(json_dictionary, recipe_digest)
 
     response = requests.post(url, json=json_dictionary)
 
     if response.status_code != 200:
         print(f"Status Code: {response.status_code}, Response: {response.json()}")
         raise Exception(response.json())
+
+
+def write_to_server_test_directory(json_dictionary, recipe_digest):
+    file_name = "../../wildfit-server/src/test/resources/" + recipe_digest.name + ".json"
+    file_name = file_name.replace(" ", "_")
+
+    with open(file_name, 'w') as f:
+        json.dump(json_dictionary, f, indent=2)
 
 
 def parse_recipe(recipe_file):
@@ -58,11 +68,9 @@ def parse_recipe(recipe_file):
     parse_recipe_sheet = ParseRecipeSheet()
 
     recipe_digest = parse_title_sheet.parse_sheet(wb[TITLE_SHEET])
-    print(recipe_digest)
 
     if is_new_recipe(recipe_digest):
         parse_recipe_sheet.parse_sheet(wb[RECIPE_SHEET], recipe_digest)
-        print(recipe_digest)
         create_recipe(recipe_digest)
 
 

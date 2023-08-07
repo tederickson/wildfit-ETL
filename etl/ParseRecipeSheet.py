@@ -38,8 +38,8 @@ class ParseRecipeSheet(AbstractParseSheet):
             row = sheet[recipe_row]
             title = self.get_value(row, 'Title')
             instruction = self.get_value(row, 'Instruction')
-            ingredient = self.get_value(row, 'Ingredient')
-            print("Title {} Instruction {} Ingredient {}".format(title, instruction, ingredient))
+            # ingredient = self.get_value(row, 'Ingredient')
+            # print("Title {} Instruction {} Ingredient {}".format(title, instruction, ingredient))
 
             if title is not None:
                 recipe_digest.add_instruction_group(instruction_group_digest)
