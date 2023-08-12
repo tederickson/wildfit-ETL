@@ -10,7 +10,8 @@ The connection and secrets are found in the .env file.  The contents change base
 
 The project utilizes Object Oriented Programming.  The main class is ParseRecipes.py.  
 * An abstract class defines the common methods of child classes tasked with parsing a particular Excel sheet
-* Child classes convert the data to JSON
+* Child classes parse the sheet, validate column headers and get the value of row and header
+* Data classes are used to hold and convert the data to JSON
 * Enums are used to map column headings to indexes
 * The main class calls the RESTful web service with the JSON request
 

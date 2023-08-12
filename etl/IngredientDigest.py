@@ -1,15 +1,13 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class IngredientDigest:
-    def __init__(self,
-                 food_name,
-                 description,
-                 ingredient_serving_qty,
-                 ingredient_serving_unit,
-                 ingredient_type):
-        self.food_name = food_name
-        self.description = description
-        self.ingredient_serving_qty = ingredient_serving_qty
-        self.ingredient_serving_unit = ingredient_serving_unit
-        self.ingredient_type = ingredient_type
+    food_name: str
+    description: str
+    ingredient_serving_qty: float
+    ingredient_serving_unit: str
+    ingredient_type: str
 
     def __str__(self):
         text = ("IngredientDigest: food_name='{}', description='{}', ingredient_serving_qty={}"

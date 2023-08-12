@@ -1,15 +1,15 @@
 from etl.IngredientDigest import IngredientDigest
 from etl.InstructionDigest import InstructionDigest
+from dataclasses import dataclass, field
+from typing import List
 
 
+@dataclass
 class InstructionGroupDigest:
-    def __init__(self,
-                 instruction_group_number,
-                 name):
-        self.instruction_group_number = instruction_group_number
-        self.name = name
-        self.instructions = []
-        self.ingredients = []
+    instruction_group_number: int
+    name: str
+    instructions: List[InstructionDigest] = field(default_factory=lambda: [])
+    ingredients: List[IngredientDigest] = field(default_factory=lambda: [])
 
     def add_instruction(self, instruction):
         self.instructions.append(instruction)
