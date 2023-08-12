@@ -1,6 +1,7 @@
 import json
 import os
-
+import sys
+import getopt
 import openpyxl
 import requests
 from dotenv import load_dotenv
@@ -16,6 +17,7 @@ RECIPE_SHEET = 'Sheet2'
 
 UUID = ""
 HOST_SERVER = ""
+DEBUG = False
 
 
 def validate_sheet_names(sheet_names):
@@ -52,11 +54,13 @@ def create_recipe(recipe_digest):
 
 
 def write_to_server_test_directory(json_dictionary, recipe_digest):
-    file_name = "../../wildfit-server/src/test/resources/" + recipe_digest.name + ".json"
-    file_name = file_name.replace(" ", "_")
+    if DEBUG:
+        print(f"writing {recipe_digest.name}")
+        file_name = "../../wildfit-server/src/test/resources/" + recipe_digest.name + ".json"
+        file_name = file_name.replace(" ", "_")
 
-    with open(file_name, 'w') as f:
-        json.dump(json_dictionary, f, indent=2)
+        with open(file_name, 'w') as f:
+            json.dump(json_dictionary, f, indent=2)
 
 
 def parse_recipe(recipe_file):
@@ -82,6 +86,16 @@ if __name__ == '__main__':
     HOST_SERVER = os.environ.get('host-server')
     if HOST_SERVER is None:
         raise Exception("host-server environment variable is not defined")
+
+    argv = sys.argv[1:]
+    opts, args = getopt.getopt(argv, "hd", ["help", "debug"])
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            print("ParseRecipes.py --debug  or -d")
+            print("Debug writes the JSON request to the local server test directory")
+            sys.exit()
+        elif opt in ("-d", "--debug"):
+            DEBUG = True
 
     recipe_list = os.listdir(RECIPE_DIRECTORY)
 
