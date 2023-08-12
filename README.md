@@ -15,7 +15,7 @@ The project utilizes Object Oriented Programming.  The main class is ParseRecipe
 * The main class calls the RESTful web service with the JSON request
 
 Command line arguments are used for help or to turn on debugging 
-which writes the large json request into the local server's test directory.
+which writes the large JSON request into the local server's test directory.
 
 # Acceptance Criteria
 The title sheet contains the attributes common to the entire recipe.
