@@ -4,8 +4,9 @@ import sys
 import getopt
 import openpyxl
 import requests
-from dotenv import load_dotenv
+import re
 
+from dotenv import load_dotenv
 from etl.ParseRecipeSheet import ParseRecipeSheet
 from etl.ParseTitleSheet import ParseTitleSheet
 
@@ -55,8 +56,10 @@ def create_recipe(recipe_digest):
 
 def write_to_server_test_directory(json_dictionary, recipe_digest):
     if DEBUG:
-        print(f"writing {recipe_digest.name}")
-        file_name = "../../wildfit-server/src/test/resources/" + recipe_digest.name + ".json"
+        recipe_name = re.sub("[^A-Z0-9]", "_", recipe_digest.name, 0, re.IGNORECASE)
+        print(f"   Writing {recipe_digest.name} to {recipe_name}")
+
+        file_name = "../../wildfit-server/src/test/resources/" + recipe_name + ".json"
         file_name = file_name.replace(" ", "_")
 
         with open(file_name, 'w') as f:
