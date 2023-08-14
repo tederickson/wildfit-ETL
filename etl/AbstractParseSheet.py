@@ -10,4 +10,4 @@ class AbstractParseSheet(ABC):
     def validate_headers(self, sheet): pass
 
     @abstractmethod
-    def get_value(self, row, column_name): pass
+    def get_value(self, row, column): pass
