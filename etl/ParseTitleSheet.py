@@ -17,7 +17,7 @@ class ParseTitleSheet(AbstractParseSheet):
                 raise Exception("Expected column {} instead of {}".format(self.HEADERS[index], column[0].value))
             index += 1
 
-    def get_value(self, row, column ):
+    def get_value(self, row, column):
         return row[column.value].value
 
     def parse_sheet(self, sheet):
