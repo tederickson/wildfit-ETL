@@ -8,7 +8,7 @@ Read Excel spreadsheets and call the WILDFIT server to insert recipes.
 
 The connection and secrets are found in the .env file.  The contents change based on test or production environment.
 
-The project utilizes Object Oriented Programming.  The main class is ParseRecipes.py.  
+The project utilizes Object-oriented Programming.  The main class is ParseRecipes.py.  
 * An abstract class defines the common methods of child classes tasked with parsing a particular Excel sheet
 * Child classes parse the sheet, validate column headers and get the value of row and header
 * Data classes are used to hold and convert the data to JSON
