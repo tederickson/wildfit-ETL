@@ -10,23 +10,3 @@ class RecipeColumn(Enum):
     QUANTITY = 5
     UNIT = 6
     TYPE = 7
-
-    @classmethod
-    def from_heading(cls, name):
-        match name:
-            case 'Title':
-                return cls.TITLE
-            case 'Instruction':
-                return cls.INSTRUCTION
-            case 'Text':
-                return cls.TEXT
-            case 'Ingredient':
-                return cls.INGREDIENT
-            case 'Description':
-                return cls.DESCRIPTION
-            case 'Quantity':
-                return cls.QUANTITY
-            case 'Unit':
-                return cls.UNIT
-            case 'Type':
-                return cls.TYPE

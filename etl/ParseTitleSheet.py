@@ -17,19 +17,18 @@ class ParseTitleSheet(AbstractParseSheet):
                 raise Exception("Expected column {} instead of {}".format(self.HEADERS[index], column[0].value))
             index += 1
 
-    def get_value(self, row, column_name):
-        index = TitleColumn.from_heading(column_name).value
-        return row[index].value
+    def get_value(self, row, column ):
+        return row[column.value].value
 
     def parse_sheet(self, sheet):
         self.validate_headers(sheet)
         first_row = sheet[2]
 
-        recipe_digest = RecipeDigest(self.get_value(first_row, 'Title'),
-                                     self.get_value(first_row, 'Season'),
-                                     self.get_value(first_row, 'PrepTimeMinutes'),
-                                     self.get_value(first_row, 'CookTimeMinutes'),
-                                     self.get_value(first_row, 'ServingUnit'),
-                                     self.get_value(first_row, 'ServingQty'),
-                                     self.get_value(first_row, 'Introduction'))
+        recipe_digest = RecipeDigest(self.get_value(first_row, TitleColumn.TITLE),
+                                     self.get_value(first_row, TitleColumn.SEASON),
+                                     self.get_value(first_row, TitleColumn.PREP_TIME_MINUTES),
+                                     self.get_value(first_row, TitleColumn.COOK_TIME_MINUTES),
+                                     self.get_value(first_row, TitleColumn.SERVING_UNIT),
+                                     self.get_value(first_row, TitleColumn.SERVING_QTY),
+                                     self.get_value(first_row, TitleColumn.INTRODUCTION))
         return recipe_digest
