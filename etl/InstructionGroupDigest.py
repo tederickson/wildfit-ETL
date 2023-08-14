@@ -20,13 +20,13 @@ class InstructionGroupDigest:
     def __str__(self):
         text = "InstructionGroupDigest: instruction_group_number={}, name='{}'"
         text = text + ", instructions ["
-        for x in self.instructions:
-            text = text + "\n   " + str(x) + ","
+        for instructions in self.instructions:
+            text = text + "\n   " + str(instructions) + ","
         text = text + "]"
 
         text = text + ", ingredients ["
-        for x in self.ingredients:
-            text = text + "\n   " + str(x) + ","
+        for ingredient in self.ingredients:
+            text = text + "\n   " + str(ingredient) + ","
         text = text + "]"
 
         return text.format(self.instruction_group_number, self.name)
@@ -38,11 +38,11 @@ class InstructionGroupDigest:
             "instructions": [],
             "ingredients": []
         }
-        for x in self.instructions:
-            if isinstance(x, InstructionDigest):
-                json["instructions"].append(x.to_json_dictionary())
-        for x in self.ingredients:
-            if isinstance(x, IngredientDigest):
-                json["ingredients"].append(x.to_json_dictionary())
+        for instruction in self.instructions:
+            if isinstance(instruction, InstructionDigest):
+                json["instructions"].append(instruction.to_json_dictionary())
+        for ingredient in self.ingredients:
+            if isinstance(ingredient, IngredientDigest):
+                json["ingredients"].append(ingredient.to_json_dictionary())
 
         return json
