@@ -49,11 +49,11 @@ class RecipeDigest:
             "servingUnit": self.serving_unit,
             "servingQty": self.serving_qty,
             "introduction": self.introduction,
-            "instructionGroups": []
+            "recipeGroups": []
         }
 
         for x in self.instruction_groups:
             if isinstance(x, InstructionGroupDigest):
-                json["instructionGroups"].append(x.to_json_dictionary())
+                json["recipeGroups"].append(x.to_json_dictionary())
 
         return json
