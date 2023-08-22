@@ -5,7 +5,7 @@ from etl.TitleColumn import TitleColumn
 
 class ParseTitleSheet(AbstractParseSheet):
     HEADERS = ['Season', 'Title', 'Introduction', 'PrepTimeMinutes', 'CookTimeMinutes', 'ServingQty',
-               'ServingUnit']
+               'ServingUnit', 'Photo']
 
     def get_headers(self):
         return self.HEADERS
@@ -30,5 +30,6 @@ class ParseTitleSheet(AbstractParseSheet):
                                      self.get_value(first_row, TitleColumn.COOK_TIME_MINUTES),
                                      self.get_value(first_row, TitleColumn.SERVING_UNIT),
                                      self.get_value(first_row, TitleColumn.SERVING_QTY),
-                                     self.get_value(first_row, TitleColumn.INTRODUCTION))
+                                     self.get_value(first_row, TitleColumn.INTRODUCTION),
+                                     self.get_value(first_row, TitleColumn.PHOTO))
         return recipe_digest

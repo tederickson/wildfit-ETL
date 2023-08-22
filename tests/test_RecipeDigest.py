@@ -12,6 +12,7 @@ class TestRecipeDigest(TestCase):
     serving_unit = "serving"
     serving_qty = 4
     introduction = "We love this!"
+    photo = "https:/bab.yaga.com"
 
     def test_strip_whitespace(self):
         recipe = RecipeDigest(self.name + "  ",
@@ -20,13 +21,15 @@ class TestRecipeDigest(TestCase):
                               self.cook_time_min,
                               self.serving_unit + "  ",
                               self.serving_qty,
-                              self.introduction + "  ")
+                              self.introduction + "  ",
+                              self.photo + "  ")
 
         self.assertEqual(self.name, recipe.name)
         self.assertEqual(self.season, recipe.season)
         self.assertEqual(self.serving_qty, recipe.serving_qty)
         self.assertEqual(self.introduction, recipe.introduction)
         self.assertEqual(0, len(recipe.instruction_groups))
+        self.assertEqual(self.photo, recipe.photo)
 
     def test_add_instruction_group(self):
         recipe = RecipeDigest(self.name,
@@ -35,7 +38,8 @@ class TestRecipeDigest(TestCase):
                               self.cook_time_min,
                               self.serving_unit,
                               self.serving_qty,
-                              self.introduction)
+                              self.introduction,
+                              self.photo)
         self.assertEqual(self.name, recipe.name)
         self.assertEqual(0, len(recipe.instruction_groups))
 
@@ -50,7 +54,8 @@ class TestRecipeDigest(TestCase):
                               self.cook_time_min,
                               self.serving_unit,
                               self.serving_qty,
-                              self.introduction)
+                              self.introduction,
+                              self.photo)
         text = str(recipe)
         self.assertIn("season", text)
 
@@ -61,7 +66,8 @@ class TestRecipeDigest(TestCase):
                               self.cook_time_min,
                               self.serving_unit,
                               self.serving_qty,
-                              self.introduction)
+                              self.introduction,
+                              self.photo)
 
         instruction_group = InstructionGroupDigest(15, "Salad")
         recipe.add_instruction_group(instruction_group)

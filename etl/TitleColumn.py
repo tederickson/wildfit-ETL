@@ -9,4 +9,4 @@ class TitleColumn(Enum):
     COOK_TIME_MINUTES = 4
     SERVING_QTY = 5
     SERVING_UNIT = 6
-
+    PHOTO = 7

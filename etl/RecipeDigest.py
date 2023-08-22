@@ -10,7 +10,8 @@ class RecipeDigest:
                  cook_time_min,
                  serving_unit,
                  serving_qty,
-                 introduction):
+                 introduction,
+                 photo):
         self.name = str(name).strip()
         self.season = str(season).strip()
         self.prep_time_min = prep_time_min
@@ -18,6 +19,7 @@ class RecipeDigest:
         self.serving_unit = str(serving_unit).strip()
         self.serving_qty = serving_qty
         self.introduction = str(introduction).strip()
+        self.photo = str(photo).strip()
         self.instruction_groups = []
 
     def add_instruction_group(self, instruction_group):
@@ -25,7 +27,7 @@ class RecipeDigest:
 
     def __str__(self):
         text = ("RecipeDigest: name='{}', season={}, prepTimeMin={}, cookTimeMin={},"
-                " servingUnit='{}', servingQty={}, introduction='{}', instruction_groups [")
+                " servingUnit='{}', servingQty={}, introduction='{}',photo='{}', instruction_groups [")
 
         for x in self.instruction_groups:
             text = text + "\n   " + str(x) + ","
@@ -37,6 +39,7 @@ class RecipeDigest:
                            self.cook_time_min,
                            self.serving_unit,
                            self.serving_qty,
+                           self.photo,
                            self.introduction)
 
     # Convert class to dictionary for /v1/recipes/users/{userId}
@@ -49,6 +52,7 @@ class RecipeDigest:
             "servingUnit": self.serving_unit,
             "servingQty": self.serving_qty,
             "introduction": self.introduction,
+            "thumbnail": self.photo,
             "recipeGroups": []
         }
 
