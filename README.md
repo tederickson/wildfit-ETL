@@ -19,11 +19,9 @@ Command line arguments are used for help or to turn on debugging
 which writes the large JSON request into the local server's test directory.
 
 # Install Packages
-The commands to install the packages used by this project:
+This command installs the packages used by this project:
 ```bash
-pip install openpyxl
-pip install requests
-pip install python-dotenv
+pip install -r requirements.txt
 ```
 
 # Acceptance Criteria
