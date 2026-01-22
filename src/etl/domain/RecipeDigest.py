@@ -1,4 +1,4 @@
-from src.etl.InstructionGroupDigest import InstructionGroupDigest
+from src.etl.domain.InstructionGroupDigest import InstructionGroupDigest
 
 
 class RecipeDigest:

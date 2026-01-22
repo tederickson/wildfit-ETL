@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from src.etl.InstructionGroupDigest import InstructionGroupDigest
-from src.etl.RecipeDigest import RecipeDigest
+from src.etl.domain.InstructionGroupDigest import InstructionGroupDigest
+from src.etl.domain.RecipeDigest import RecipeDigest
 
 
 class TestRecipeDigest(TestCase):

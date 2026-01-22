@@ -1,7 +1,7 @@
 from src.etl.AbstractParseSheet import AbstractParseSheet
-from src.etl.IngredientDigest import IngredientDigest
-from src.etl.InstructionDigest import InstructionDigest
-from src.etl.InstructionGroupDigest import InstructionGroupDigest
+from src.etl.domain.IngredientDigest import IngredientDigest
+from src.etl.domain.InstructionDigest import InstructionDigest
+from src.etl.domain.InstructionGroupDigest import InstructionGroupDigest
 from src.etl.RecipeColumn import RecipeColumn
 
 
