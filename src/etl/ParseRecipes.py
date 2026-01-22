@@ -82,14 +82,17 @@ def parse_recipe(recipe_file):
         create_recipe(recipe_digest)
 
 
-if __name__ == '__main__':
-    UUID = os.environ.get('UUID')
-    if UUID is None:
-        raise Exception("UUID environment variable is not defined")
+def get_environment(name):
+    env_name = os.environ.get(name)
+    if env_name is None:
+        raise Exception("{} environment variable is not defined".format(name))
 
-    HOST_SERVER = os.environ.get('host-server')
-    if HOST_SERVER is None:
-        raise Exception("host-server environment variable is not defined")
+    return env_name
+
+
+if __name__ == '__main__':
+    UUID = get_environment('UUID')
+    HOST_SERVER = get_environment('host-server')
 
     argv = sys.argv[1:]
     opts, args = getopt.getopt(argv, "hd", ["help", "debug"])
