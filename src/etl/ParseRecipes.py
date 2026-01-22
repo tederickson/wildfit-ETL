@@ -48,8 +48,6 @@ def create_recipe(recipe_digest):
     json_dictionary = recipe_digest.to_json_dictionary()
     write_to_server_test_directory(json_dictionary, recipe_digest)
 
-    print(json_dictionary)
-
     response = requests.post(url, json=json_dictionary)
 
     if response.status_code != 200:
