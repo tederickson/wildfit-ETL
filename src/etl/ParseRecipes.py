@@ -1,18 +1,19 @@
+import getopt
 import json
 import os
+import re
 import sys
-import getopt
+
 import openpyxl
 import requests
-import re
-
 from dotenv import load_dotenv
-from etl.ParseRecipeSheet import ParseRecipeSheet
-from etl.ParseTitleSheet import ParseTitleSheet
+
+from src.etl.ParseRecipeSheet import ParseRecipeSheet
+from src.etl.ParseTitleSheet import ParseTitleSheet
 
 load_dotenv()  # obtain environment variables from .env.
 
-RECIPE_DIRECTORY = "../data/"
+RECIPE_DIRECTORY = "../../data/"
 TITLE_SHEET = 'Sheet1'
 RECIPE_SHEET = 'Sheet2'
 

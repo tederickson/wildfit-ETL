@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from etl.IngredientDigest import IngredientDigest
-from etl.InstructionDigest import InstructionDigest
-from etl.InstructionGroupDigest import InstructionGroupDigest
+from src.etl.IngredientDigest import IngredientDigest
+from src.etl.InstructionDigest import InstructionDigest
+from src.etl.InstructionGroupDigest import InstructionGroupDigest
 
 
 class TestInstructionGroupDigest(TestCase):

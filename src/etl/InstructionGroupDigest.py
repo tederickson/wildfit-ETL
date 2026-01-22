@@ -1,7 +1,8 @@
-from etl.IngredientDigest import IngredientDigest
-from etl.InstructionDigest import InstructionDigest
 from dataclasses import dataclass, field
 from typing import List
+
+from src.etl.IngredientDigest import IngredientDigest
+from src.etl.InstructionDigest import InstructionDigest
 
 
 @dataclass

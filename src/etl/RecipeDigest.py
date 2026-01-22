@@ -1,4 +1,4 @@
-from etl.InstructionGroupDigest import InstructionGroupDigest
+from src.etl.InstructionGroupDigest import InstructionGroupDigest
 
 
 class RecipeDigest:
