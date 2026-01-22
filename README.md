@@ -38,3 +38,8 @@ A recipe row has either a
 * Ingredient (new ingredient add to the current instruction group)
 
 But if there is only one instruction group then the Title is optional
+
+# Run Wildfit Server
+1. Download the code at https://github.com/tederickson/wildfit-server
+2. Run the following command in a terminal window: `mvn clean spring-boot:run -Dspring-boot.run.profiles=dev`
+
