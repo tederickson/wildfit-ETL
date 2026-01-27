@@ -19,7 +19,8 @@ class InstructionGroupDigest:
         self.ingredients.append(ingredient)
 
     def __str__(self):
-        text = "InstructionGroupDigest: instruction_group_number={}, name='{}'"
+        text = "InstructionGroupDigest: instruction_group_number={}, name='{}'".format(self.instruction_group_number,
+                                                                                       self.name)
         text = text + ", instructions ["
         for instructions in self.instructions:
             text = text + "\n   " + str(instructions) + ","
@@ -30,7 +31,7 @@ class InstructionGroupDigest:
             text = text + "\n   " + str(ingredient) + ","
         text = text + "]"
 
-        return text.format(self.instruction_group_number, self.name)
+        return text
 
     def to_json_dictionary(self):
         json = {
