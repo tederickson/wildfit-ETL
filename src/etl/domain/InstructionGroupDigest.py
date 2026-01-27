@@ -9,8 +9,8 @@ from src.etl.domain.InstructionDigest import InstructionDigest
 class InstructionGroupDigest:
     instruction_group_number: int
     name: str
-    instructions: List[InstructionDigest] = field(default_factory=lambda: [])
-    ingredients: List[IngredientDigest] = field(default_factory=lambda: [])
+    instructions: List[InstructionDigest] = field(default_factory=list)
+    ingredients: List[IngredientDigest] = field(default_factory=list)
 
     def add_instruction(self, instruction):
         self.instructions.append(instruction)
