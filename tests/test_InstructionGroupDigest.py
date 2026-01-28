@@ -37,3 +37,7 @@ class TestInstructionGroupDigest(TestCase):
 
         self.assertEqual(ingredient, instruction_group_digest.ingredients[0])
         print(instruction_group_digest)
+
+        # Verify the __repr__ magic method can construct a copy
+        copy = eval(instruction_group_digest.__repr__())
+        self.assertEqual(instruction_group_digest, copy)
